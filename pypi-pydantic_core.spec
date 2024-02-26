@@ -6,10 +6,10 @@
 # autospec commit: da8b975
 #
 Name     : pypi-pydantic_core
-Version  : 2.16.2
-Release  : 7
-URL      : https://files.pythonhosted.org/packages/0d/72/64550ef171432f97d046118a9869ad774925c2f442589d5f6164b8288e85/pydantic_core-2.16.2.tar.gz
-Source0  : https://files.pythonhosted.org/packages/0d/72/64550ef171432f97d046118a9869ad774925c2f442589d5f6164b8288e85/pydantic_core-2.16.2.tar.gz
+Version  : 2.16.3
+Release  : 8
+URL      : https://files.pythonhosted.org/packages/77/3f/65dbe5231946fe02b4e6ea92bc303d2462f45d299890fd5e8bfe4d1c3d66/pydantic_core-2.16.3.tar.gz
+Source0  : https://files.pythonhosted.org/packages/77/3f/65dbe5231946fe02b4e6ea92bc303d2462f45d299890fd5e8bfe4d1c3d66/pydantic_core-2.16.3.tar.gz
 Source1  : http://localhost/cgit/vendor/pypi-pydantic_core/snapshot/pypi-pydantic_core-2024-01-29-21-54-12.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
@@ -63,22 +63,19 @@ python3 components for the pypi-pydantic_core package.
 
 
 %prep
-%setup -q -n pydantic_core-2.16.2
+%setup -q -n pydantic_core-2.16.3
 cd %{_builddir}
 tar xf %{_sourcedir}/pypi-pydantic_core-2024-01-29-21-54-12.tar.xz
-cd %{_builddir}/pydantic_core-2.16.2
+cd %{_builddir}/pydantic_core-2.16.3
 mkdir -p ./vendor
-cp -r %{_builddir}/pypi-pydantic_core-2024-01-29-21-54-12/* %{_builddir}/pydantic_core-2.16.2/./vendor
+cp -r %{_builddir}/pypi-pydantic_core-2024-01-29-21-54-12/* %{_builddir}/pydantic_core-2.16.3/./vendor
 mkdir -p .cargo
 echo '[source.crates-io]' >> .cargo/config.toml
 echo 'replace-with = "vendored-sources"' >> .cargo/config.toml
 echo '[source.vendored-sources]' >> .cargo/config.toml
 echo 'directory = "vendor"' >> .cargo/config.toml
 pushd ..
-cp -a pydantic_core-2.16.2 buildavx2
-popd
-pushd ..
-cp -a pydantic_core-2.16.2 buildapx
+cp -a pydantic_core-2.16.3 buildavx2
 popd
 
 %build
@@ -86,7 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1707419500
+export SOURCE_DATE_EPOCH=1708971863
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -108,16 +105,6 @@ CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 "
-LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
-python3 -m build --wheel --skip-dependency-check --no-isolation
-
-popd
-pushd ../buildapx/
-CC=gcc-14
-CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -march=x86-64-v3 -mapxf -mavx10.1 -Wl,-z,x86-64-v3 "
-CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -march=x86-64-v3 -mapxf -mavx10.1 -Wl,-z,x86-64-v3 "
-FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 -mapxf -mavx10.1 "
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
 python3 -m build --wheel --skip-dependency-check --no-isolation
 
@@ -325,17 +312,7 @@ FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 "
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
 python3 -m installer --destdir=%{buildroot}-v3 dist/*.whl
 popd
-pushd ../buildapx/
-CC=gcc-14
-CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -march=x86-64-v3 -mapxf -mavx10.1 -Wl,-z,x86-64-v3 "
-CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -march=x86-64-v3 -mapxf -mavx10.1 -Wl,-z,x86-64-v3 "
-FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 -mapxf -mavx10.1 "
-LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
-python3 -m installer --destdir=%{buildroot}-va dist/*.whl
-popd
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
-/usr/bin/elf-move.py apx %{buildroot}-va %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
