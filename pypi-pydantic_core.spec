@@ -7,7 +7,7 @@
 #
 Name     : pypi-pydantic_core
 Version  : 2.23.4
-Release  : 16
+Release  : 17
 URL      : https://files.pythonhosted.org/packages/e2/aa/6b6a9b9f8537b872f552ddd46dd3da230367754b6f707b8e1e963f515ea3/pydantic_core-2.23.4.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e2/aa/6b6a9b9f8537b872f552ddd46dd3da230367754b6f707b8e1e963f515ea3/pydantic_core-2.23.4.tar.gz
 Source1  : http://localhost/cgit/vendor/pypi-pydantic_core/snapshot/pypi-pydantic_core-2024-09-09-15-41-18.tar.xz
