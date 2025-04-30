@@ -6,10 +6,10 @@
 # autospec commit: 9594167
 #
 Name     : pypi-pydantic_core
-Version  : 2.34.1
-Release  : 22
-URL      : https://files.pythonhosted.org/packages/42/fa/5f682f3db14e14f7b5b7f5008ac24594b93943d1da4facbacff5876624cf/pydantic_core-2.34.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/42/fa/5f682f3db14e14f7b5b7f5008ac24594b93943d1da4facbacff5876624cf/pydantic_core-2.34.1.tar.gz
+Version  : 2.33.2
+Release  : 23
+URL      : https://github.com/pydantic/pydantic-core/archive/refs/tags/v2.33.2.tar.gz
+Source0  : https://github.com/pydantic/pydantic-core/archive/refs/tags/v2.33.2.tar.gz
 Source1  : http://localhost/cgit/vendor/pypi-pydantic_core/snapshot/pypi-pydantic_core-2024-11-22-16-54-25.tar.xz
 Source2  : http://localhost/cgit/vendor/pypi-pydantic_core/snapshot/pypi-pydantic_core-2025-04-30-15-53-11.tar.gz
 Summary  : Core functionality for Pydantic validation and serialization
@@ -64,16 +64,16 @@ python3 components for the pypi-pydantic_core package.
 
 
 %prep
-%setup -q -n pydantic_core-2.34.1
+%setup -q -n pydantic-core-2.33.2
 cd %{_builddir}
 tar xf %{_sourcedir}/pypi-pydantic_core-2024-11-22-16-54-25.tar.xz
 cd %{_builddir}
 tar xf %{_sourcedir}/pypi-pydantic_core-2025-04-30-15-53-11.tar.gz
-cd %{_builddir}/pydantic_core-2.34.1
+cd %{_builddir}/pydantic-core-2.33.2
 mkdir -p ./vendor
-cp -r %{_builddir}/pypi-pydantic_core-2024-11-22-16-54-25/. %{_builddir}/pydantic_core-2.34.1/./vendor
+cp -r %{_builddir}/pypi-pydantic_core-2024-11-22-16-54-25/. %{_builddir}/pydantic-core-2.33.2/./vendor
 mkdir -p ./vendor
-cp -r %{_builddir}/pypi-pydantic_core-2025-04-30-15-53-11/. %{_builddir}/pydantic_core-2.34.1/./vendor
+cp -r %{_builddir}/pypi-pydantic_core-2025-04-30-15-53-11/. %{_builddir}/pydantic-core-2.33.2/./vendor
 mkdir -p .cargo
 echo '
 [source.crates-io]
@@ -83,7 +83,7 @@ replace-with = "vendored-sources"
 directory = "vendor"
 ' >> .cargo/config.toml
 pushd ..
-cp -a pydantic_core-2.34.1 buildavx2
+cp -a pydantic-core-2.33.2 buildavx2
 popd
 
 %build
@@ -91,7 +91,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1746028916
+export SOURCE_DATE_EPOCH=1746031500
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -137,7 +137,7 @@ LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-pydantic_core
-cp %{_builddir}/pydantic_core-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-pydantic_core/83ba7cc9eda2b15fee0037c3d7d3af32a290b6d1 || :
+cp %{_builddir}/pydantic-core-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-pydantic_core/83ba7cc9eda2b15fee0037c3d7d3af32a290b6d1 || :
 cp %{_builddir}/pypi-pydantic_core-2024-11-22-16-54-25/ahash/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/pypi-pydantic_core/5798832c31663cedc1618d18544d445da0295229 || :
 cp %{_builddir}/pypi-pydantic_core-2024-11-22-16-54-25/ahash/LICENSE-MIT %{buildroot}/usr/share/package-licenses/pypi-pydantic_core/2646b6d2453275031022ab245a3a6d5da4ba80b2 || :
 cp %{_builddir}/pypi-pydantic_core-2024-11-22-16-54-25/aho-corasick/COPYING %{buildroot}/usr/share/package-licenses/pypi-pydantic_core/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
